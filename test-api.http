@@ -1,0 +1,105 @@
+
+
+################ Get all ################ 
+
+### comments
+
+GET http://localhost:8080/api/comments
+
+
+### posts
+GET http://localhost:8080/api/posts
+
+
+### reports
+GET http://localhost:8080/api/reports
+
+
+### saveForLaters
+GET http://localhost:8080/api/saveForLaters
+
+
+### usersFT
+GET http://localhost:8080/api/usersFT
+
+###############################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Create new book
+POST http://localhost:8080/Books
+Content-Type: application/json
+
+{
+  "title": "test Book 6",
+  "price": 763,
+  "state": true,
+  "author": {
+    "id": "2d29b090-a0c0-472f-a9ff-ba5c0cb529f6"
+  }
+}
+
+## d1230870-a4ca-4f59-86fe-531df7a526ed
+## 2b5628dd-2497-4bb9-8868-b33a4c891840
+
+### Delete book by id
+DELETE http://localhost:8080/Books/f3e887d2-7a89-4114-bd55-04002003651b
+
+
+### Update book Data
+
+Put http://localhost:8080/Books/f3e887d2-7a89-4114-bd55-04002003651b?price=120
+
+
+
+### Get ASC books
+GET http://localhost:8080/Books/sorted?sort=price,ASC
+
+
+### Get DESC books
+
+GET http://localhost:8080/Books/sorted?sort=price,DESC
+
+
+
+
+### Delete All Books
+DELETE http://localhost:8080/Books/delete
+
+
+#############################################
+
+
+### Get all Authors
+GET http://localhost:8080/Authors
+
+### Create new Authors
+POST http://localhost:8080/Authors
+Content-Type: application/json
+
+{
+  "firstName": "Author ",
+  "lastName": "3",
+  "phoneNumber": "989278393731"
+}
+
+
+### Delete Authors by id
+DELETE http://localhost:8080/Authors/f95924a0-bc61-4b78-ac48-dd7e734d06c3
+
+
+### Delete All Authors
+DELETE http://localhost:8080/Authors/delete
+
