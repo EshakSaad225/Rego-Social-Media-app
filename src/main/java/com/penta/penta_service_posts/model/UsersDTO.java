@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data 
 @AllArgsConstructor 
 @NoArgsConstructor 
-public class UsersFTDTO {
+public class UsersDTO {
 
     private UUID id;
 

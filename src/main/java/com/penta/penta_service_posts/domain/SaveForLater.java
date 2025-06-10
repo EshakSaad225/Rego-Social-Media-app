@@ -34,7 +34,7 @@ public class SaveForLater {
 
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private UsersFT user;
+    private Users user;
 
     @Column
     private LocalDateTime savedAt;

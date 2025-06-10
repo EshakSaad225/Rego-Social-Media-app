@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.penta.penta_service_posts.domain.Post;
-import com.penta.penta_service_posts.domain.UsersFT;
+import com.penta.penta_service_posts.domain.Users;
 import com.penta.penta_service_posts.enums.ReportType;
 
 import jakarta.validation.constraints.Size;
@@ -27,7 +27,7 @@ public class ReportDTO {
     @Size(max = 255)
     private String reasonText;
 
-    private UsersFT createdBy;
+    private Users createdBy;
 
     private LocalDateTime createdAt;
 

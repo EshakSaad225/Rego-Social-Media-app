@@ -15,11 +15,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -58,9 +60,11 @@ public class Post {
     @JoinColumn(name = "sharedPost_id")
     private Post sharedPost;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "createdBy_id")
-    private UsersFT createdBy;
+    // @OneToOne(cascade=CascadeType.ALL)
+    // @JoinColumn(name = "createdBy_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "created_by")
+    private Users createdBy;
 
     @Column
     private LocalDateTime createdAt;
@@ -72,13 +76,13 @@ public class Post {
     @JdbcTypeCode(SqlTypes.JSON)
     private List<String> moreData;
 
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(
         name = "post_mentions",
         joinColumns = @JoinColumn(name = "post_id"),
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private List<UsersFT> mentions;
+    private List<Users> mentions;
 
     @Column(columnDefinition = "jsonb")
     @JdbcTypeCode(SqlTypes.JSON)

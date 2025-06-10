@@ -46,7 +46,7 @@ public class Report {
 
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "user_id") 
-    private UsersFT createdBy;
+    private Users createdBy;
 
     @Column
     private LocalDateTime createdAt;

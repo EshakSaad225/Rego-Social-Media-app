@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import com.penta.penta_service_posts.domain.Comment;
 import com.penta.penta_service_posts.domain.Post;
-import com.penta.penta_service_posts.domain.UsersFT;
+import com.penta.penta_service_posts.domain.Users;
 
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -33,12 +33,12 @@ public class CommentDTO {
 
     private Integer score;
 
-    private UsersFT createdBy;
+    private Users createdBy;
 
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
 
-    private List<UsersFT> mentions;
+    private List<Users> mentions;
 
 }

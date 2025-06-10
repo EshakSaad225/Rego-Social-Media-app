@@ -1,21 +1,53 @@
 package com.penta.penta_service_posts.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.penta.penta_service_posts.domain.Post;
+import com.penta.penta_service_posts.domain.Users;
 import com.penta.penta_service_posts.model.PostDTO;
 import com.penta.penta_service_posts.repos.PostRepository;
+import com.penta.penta_service_posts.repos.UsersRepository;
 import com.penta.penta_service_posts.util.NotFoundException;
-
 
 @Service
 public class PostService {
 
-    private final PostRepository postRepository;
+    @Autowired
+    private final PostRepository postRepository ;
+    
+    @Autowired
+    private UsersRepository usersRepository ;
+
+    public List<Users> getMentions(String text){ 
+
+      String regex = "\\$%<(.*?)>\\$\\$<(.*?)>";
+      Pattern pattern = Pattern.compile(regex);
+      Matcher matcher = pattern.matcher(text);
+      List<Users> usres = new ArrayList <> () ;
+
+      while (matcher.find()) {
+        System.out.println("loop");
+          try {
+              Optional <Users> user = usersRepository.findById(UUID.fromString(matcher.group(1))) ;
+              if(user.isPresent() && user.get().getName().equals(  matcher.group(2) )){
+                usres.add(user.get()) ;
+              }
+          } catch (Exception e) {
+            System.out.println("Exception => "+e);
+            throw e ;
+          }
+      }
+    return usres ;
+  }
 
     public PostService(final PostRepository postRepository) {
         this.postRepository = postRepository;
@@ -37,6 +69,8 @@ public class PostService {
     public UUID create(final PostDTO postDTO) {
         final Post post = new Post();
         mapToEntity(postDTO, post);
+        
+
         return postRepository.save(post).getId();
     }
 
@@ -69,6 +103,7 @@ public class PostService {
     }
 
     private Post mapToEntity(final PostDTO postDTO, final Post post) {
+
         post.setType(postDTO.getType());
         post.setText(postDTO.getText());
         post.setAttachments(postDTO.getAttachments());
@@ -79,7 +114,7 @@ public class PostService {
         post.setCreatedAt(postDTO.getCreatedAt());
         post.setUpdatedAt(postDTO.getUpdatedAt());
         post.setMoreData(postDTO.getMoreData());
-        post.setMentions(postDTO.getMentions());
+        post.setMentions(getMentions( postDTO.getText()));
         post.setHashtags(postDTO.getHashtags());
         return post;
     }

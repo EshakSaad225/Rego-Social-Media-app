@@ -3,7 +3,7 @@ package com.penta.penta_service_posts.model;
 import java.util.UUID;
 
 import com.penta.penta_service_posts.domain.Post;
-import com.penta.penta_service_posts.domain.UsersFT;
+import com.penta.penta_service_posts.domain.Users;
 import com.penta.penta_service_posts.enums.ReactType;
 
 import lombok.AllArgsConstructor;
@@ -22,6 +22,6 @@ public class ReactDTO {
 
     private Post post;
 
-    private UsersFT createdBy;
+    private Users createdBy;
 
 }

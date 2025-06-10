@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.penta.penta_service_posts.domain.Post;
-import com.penta.penta_service_posts.domain.UsersFT;
+import com.penta.penta_service_posts.domain.Users;
 import com.penta.penta_service_posts.enums.PostType;
 
 import jakarta.validation.constraints.Size;
@@ -37,7 +37,7 @@ public class PostDTO {
 
     private Post sharedPost;
 
-    private UsersFT createdBy;
+    private Users createdBy;
 
     private LocalDateTime createdAt;
 
@@ -45,7 +45,7 @@ public class PostDTO {
 
     private List<@Size(max = 255) String> moreData;
 
-    private List<UsersFT> mentions;
+    private List<Users> mentions;
 
     private List<@Size(max = 255) String> hashtags;
 

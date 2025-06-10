@@ -19,14 +19,43 @@ GET http://localhost:8080/api/reports
 GET http://localhost:8080/api/saveForLaters
 
 
-### usersFT
-GET http://localhost:8080/api/usersFT
+### users
+GET http://localhost:8080/api/users
 
 ###############################################################
 
+POST http://localhost:8080/api/posts
+Content-Type: application/json
+
+{
+  "type": 3 ,
+  "text": "$%<16e973ca-bbe7-4b0c-898b-8837219ac382>$$<User 2>  ",
+  "attachments" : [],
+  "isSaved": false,
+  "isShared": false,
+  "sharedPost":null ,
+  "createdBy": {
+    "id": "8f8e91a8-29fb-4d37-9ace-9947d7c1b4ed",
+    "name" : "User 1",
+    "picture" : "picture1"
+  },
+  "createdAt": "2025-06-10T05:00:53.488657800" ,
+  "updatedAt": "2025-06-10T05:00:53.488657800" ,
+  "moreData": [],
+  "hashtags": []
+}
 
 
 
+###Users
+
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "name" : "User 2",
+  "picture" : "picture2"
+}
 
 
 

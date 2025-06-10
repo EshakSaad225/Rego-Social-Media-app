@@ -15,43 +15,43 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.penta.penta_service_posts.model.UsersFTDTO;
-import com.penta.penta_service_posts.service.UsersFTService;
+import com.penta.penta_service_posts.model.UsersDTO;
+import com.penta.penta_service_posts.service.UsersService;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 
 
 @RestController
-@RequestMapping(value = "/api/usersFT", produces = MediaType.APPLICATION_JSON_VALUE)
-public class UsersFTResource {
+@RequestMapping(value = "/api/users", produces = MediaType.APPLICATION_JSON_VALUE)
+public class UsersResource {
 
-    private final UsersFTService usersFTService;
+    private final UsersService usersFTService;
 
-    public UsersFTResource(final UsersFTService usersFTService) {
+    public UsersResource(final UsersService usersFTService) {
         this.usersFTService = usersFTService;
     }
 
     @GetMapping
-    public ResponseEntity<List<UsersFTDTO>> getAllUsersFTs() {
+    public ResponseEntity<List<UsersDTO>> getAllUsersFTs() {
         return ResponseEntity.ok(usersFTService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsersFTDTO> getUsersFT(@PathVariable(name = "id") final UUID id) {
+    public ResponseEntity<UsersDTO> getUsersFT(@PathVariable(name = "id") final UUID id) {
         return ResponseEntity.ok(usersFTService.get(id));
     }
 
     @PostMapping
     @ApiResponse(responseCode = "201")
-    public ResponseEntity<UUID> createUsersFT(@RequestBody @Valid final UsersFTDTO usersFTDTO) {
+    public ResponseEntity<UUID> createUsersFT(@RequestBody @Valid final UsersDTO usersFTDTO) {
         final UUID createdId = usersFTService.create(usersFTDTO);
         return new ResponseEntity<>(createdId, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<UUID> updateUsersFT(@PathVariable(name = "id") final UUID id,
-            @RequestBody @Valid final UsersFTDTO usersFTDTO) {
+            @RequestBody @Valid final UsersDTO usersFTDTO) {
         usersFTService.update(id, usersFTDTO);
         return ResponseEntity.ok(id);
     }

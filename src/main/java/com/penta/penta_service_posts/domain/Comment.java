@@ -54,7 +54,7 @@ public class Comment {
 
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "user_id") 
-    private UsersFT createdBy;
+    private Users createdBy;
 
     @Column
     private LocalDateTime createdAt;
@@ -68,6 +68,6 @@ public class Comment {
         joinColumns = @JoinColumn(name = "comment_id"),
         inverseJoinColumns = @JoinColumn(name = "user_id") 
     )
-    private List<UsersFT> mentions;
+    private List<Users> mentions;
 
 }
