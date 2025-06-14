@@ -1,23 +1,16 @@
 package com.penta.penta_service_posts.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.penta.penta_service_posts.domain.Comment;
-import com.penta.penta_service_posts.domain.Users;
 import com.penta.penta_service_posts.model.CommentDTO;
 import com.penta.penta_service_posts.repos.CommentRepository;
-import com.penta.penta_service_posts.repos.UsersRepository;
 import com.penta.penta_service_posts.util.NotFoundException;
-
 
 @Service
 public class CommentService {
@@ -27,33 +20,6 @@ public class CommentService {
 
     @Autowired
     private PostService postService ;
-
-    @Autowired
-    private UsersRepository usersRepository ;
-
-    public List<Users> getMentionsFromText(String text){ 
-
-      String regex = "\\$%<(.*?)>\\$\\$<(.*?)>";
-      Pattern pattern = Pattern.compile(regex);
-      Matcher matcher = pattern.matcher(text);
-      List<Users> usres = new ArrayList <> () ;
-
-      while (matcher.find()) {
-        System.out.println("loop");
-          try {
-              Optional <Users> user = usersRepository.findById(UUID.fromString(matcher.group(1))) ;
-              if(user.isPresent() && user.get().getName().equals(  matcher.group(2) )){
-                usres.add(user.get()) ;
-              }
-          } catch (Exception e) {
-            System.out.println("Exception => "+e);
-            throw e ;
-          }
-      }
-      System.out.println("usersss => "+usres);
-    return usres ;
-  }
-
 
     public CommentService(final CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
@@ -112,7 +78,7 @@ public class CommentService {
         comment.setCreatedBy(commentDTO.getCreatedBy());
         comment.setCreatedAt(commentDTO.getCreatedAt());
         comment.setUpdatedAt(commentDTO.getUpdatedAt());
-        comment.setMentions(getMentionsFromText(commentDTO.getText()));
+        comment.setMentions(postService.getMentionsFromText(commentDTO.getText()));
         return comment;
     }
 
