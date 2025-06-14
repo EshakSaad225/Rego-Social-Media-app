@@ -29,15 +29,13 @@ Content-Type: application/json
 
 {
   "type": 3 ,
-  "text": "$%<16e973ca-bbe7-4b0c-898b-8837219ac382>$$<User 2>  ",
+  "text": "kpqwpodsk $%<8f8e91a8-29fb-4d37-9ace-9947d7c1b4ed>$$<User 1> iowdqs ",
   "attachments" : [],
   "isSaved": false,
   "isShared": false,
   "sharedPost":null ,
   "createdBy": {
-    "id": "8f8e91a8-29fb-4d37-9ace-9947d7c1b4ed",
-    "name" : "User 1",
-    "picture" : "picture1"
+    "id": "989ce8e4-1810-4124-b373-0998fdd3fefc"
   },
   "createdAt": "2025-06-10T05:00:53.488657800" ,
   "updatedAt": "2025-06-10T05:00:53.488657800" ,
@@ -45,18 +43,36 @@ Content-Type: application/json
   "hashtags": []
 }
 
-
-
 ###Users
 
 POST http://localhost:8080/api/users
 Content-Type: application/json
 
 {
-  "name" : "User 2",
-  "picture" : "picture2"
+  "name" : "User 3",
+  "picture" : "picture3"
 }
 
+
+### Comment
+
+POST http://localhost:8080/api/comments
+Content-Type: application/json
+
+{
+  "post" : {
+    "id": "99c01dde-447f-48b8-bdfc-9a3af14ff7f1"
+  },
+  "parent" : null ,
+  "text" : "kpqwpodsk $%<8f8e91a8-29fb-4d37-9ace-9947d7c1b4ed>$$<User 1> iowdqs " ,
+  "attachments" : [] ,
+  "score" : 4 ,
+  "createdBy":   {
+    "id": "989ce8e4-1810-4124-b373-0998fdd3fefc"
+  },
+  "createdAt": "2025-06-10T05:00:53.488657800" ,
+  "updatedAt": "2025-06-10T05:00:53.488657800" 
+}
 
 
 

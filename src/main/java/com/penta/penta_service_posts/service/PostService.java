@@ -27,7 +27,7 @@ public class PostService {
     @Autowired
     private UsersRepository usersRepository ;
 
-    public List<Users> getMentions(String text){ 
+    public List<Users> getMentionsFromText(String text){ 
 
       String regex = "\\$%<(.*?)>\\$\\$<(.*?)>";
       Pattern pattern = Pattern.compile(regex);
@@ -46,6 +46,7 @@ public class PostService {
             throw e ;
           }
       }
+      System.out.println("usersss => "+usres);
     return usres ;
   }
 
@@ -114,7 +115,7 @@ public class PostService {
         post.setCreatedAt(postDTO.getCreatedAt());
         post.setUpdatedAt(postDTO.getUpdatedAt());
         post.setMoreData(postDTO.getMoreData());
-        post.setMentions(getMentions( postDTO.getText()));
+        post.setMentions(getMentionsFromText( postDTO.getText()));
         post.setHashtags(postDTO.getHashtags());
         return post;
     }

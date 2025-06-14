@@ -60,8 +60,6 @@ public class Post {
     @JoinColumn(name = "sharedPost_id")
     private Post sharedPost;
 
-    // @OneToOne(cascade=CascadeType.ALL)
-    // @JoinColumn(name = "createdBy_id")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "created_by")
     private Users createdBy;
