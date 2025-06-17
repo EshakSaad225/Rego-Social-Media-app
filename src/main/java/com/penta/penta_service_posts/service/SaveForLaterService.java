@@ -28,6 +28,13 @@ public class SaveForLaterService {
                 .toList();
     }
 
+    public List<SaveForLaterDTO> getUserSaveForLaterPosts(UUID userId) {
+        final List<SaveForLater> saveForLaters = saveForLaterRepository.findByCreatedById(userId);
+        return saveForLaters.stream()
+                .map(saveForLater -> mapToDTO(saveForLater, new SaveForLaterDTO()))
+                .toList();
+    }
+
     public SaveForLaterDTO get(final UUID id) {
         return saveForLaterRepository.findById(id)
                 .map(saveForLater -> mapToDTO(saveForLater, new SaveForLaterDTO()))
@@ -55,16 +62,16 @@ public class SaveForLaterService {
             final SaveForLaterDTO saveForLaterDTO) {
         saveForLaterDTO.setId(saveForLater.getId());
         saveForLaterDTO.setPost(saveForLater.getPost());
-        saveForLaterDTO.setUser(saveForLater.getUser());
-        saveForLaterDTO.setSavedAt(saveForLater.getSavedAt());
+        saveForLaterDTO.setCreatedBy(saveForLater.getCreatedBy());
+        saveForLaterDTO.setCreatedAt(saveForLater.getCreatedAt());
         return saveForLaterDTO;
     }
 
     private SaveForLater mapToEntity(final SaveForLaterDTO saveForLaterDTO,
             final SaveForLater saveForLater) {
         saveForLater.setPost(saveForLaterDTO.getPost());
-        saveForLater.setUser(saveForLaterDTO.getUser());
-        saveForLater.setSavedAt(saveForLaterDTO.getSavedAt());
+        saveForLater.setCreatedBy(saveForLaterDTO.getCreatedBy());
+        saveForLater.setCreatedAt(saveForLaterDTO.getCreatedAt());
         return saveForLater;
     }
 

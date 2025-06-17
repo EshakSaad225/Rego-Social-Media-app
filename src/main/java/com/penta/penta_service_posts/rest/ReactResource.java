@@ -1,11 +1,8 @@
 package com.penta.penta_service_posts.rest;
 
-import com.penta.penta_service_posts.model.ReactDTO;
-import com.penta.penta_service_posts.service.ReactService;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +14,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.penta.penta_service_posts.enums.ReactType;
+import com.penta.penta_service_posts.model.ReactDTO;
+import com.penta.penta_service_posts.service.ReactService;
+
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -48,8 +52,8 @@ public class ReactResource {
 
     @PutMapping("/{id}")
     public ResponseEntity<UUID> updateReact(@PathVariable(name = "id") final UUID id,
-            @RequestBody @Valid final ReactDTO reactDTO) {
-        reactService.update(id, reactDTO);
+            @RequestBody @Valid final ReactType type ) {
+        reactService.update(id, type );
         return ResponseEntity.ok(id);
     }
 

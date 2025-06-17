@@ -7,6 +7,8 @@ import java.util.UUID;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -56,9 +58,11 @@ public class Comment {
     private Users createdBy;
 
     @Column
+    @CreatedDate
     private LocalDateTime createdAt;
 
     @Column
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 
     @ManyToMany(fetch=FetchType.EAGER)

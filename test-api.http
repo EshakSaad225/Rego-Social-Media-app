@@ -10,6 +10,11 @@ GET http://localhost:8080/api/comments
 ### posts
 GET http://localhost:8080/api/posts
 
+### User posts
+GET http://localhost:8080/api/posts/451cb4ad-6307-4097-90db-a3b934e319d8
+
+### reacts
+GET http://localhost:8080/api/reacts
 
 ### reports
 GET http://localhost:8080/api/reports
@@ -18,27 +23,29 @@ GET http://localhost:8080/api/reports
 ### saveForLaters
 GET http://localhost:8080/api/saveForLaters
 
+### User SaveForLaters Posts
+GET http://localhost:8080/api/saveForLaters/935f2590-750e-48b0-b1a7-e68c538877f2
 
 ### users
 GET http://localhost:8080/api/users
 
 ###############################################################
 
+################ Create ################ 
+
 POST http://localhost:8080/api/posts
 Content-Type: application/json
 
 {
   "type": 3 ,
-  "text": "kpqwpodsk $%<8f8e91a8-29fb-4d37-9ace-9947d7c1b4ed>$$<User 1> iowdqs ",
+  "text": "post 2",
   "attachments" : [],
   "isSaved": false,
   "isShared": false,
   "sharedPost":null ,
   "createdBy": {
-    "id": "989ce8e4-1810-4124-b373-0998fdd3fefc"
+    "id": "935f2590-750e-48b0-b1a7-e68c538877f2"
   },
-  "createdAt": "2025-06-10T05:00:53.488657800" ,
-  "updatedAt": "2025-06-10T05:00:53.488657800" ,
   "moreData": [],
   "hashtags": []
 }
@@ -49,8 +56,8 @@ POST http://localhost:8080/api/users
 Content-Type: application/json
 
 {
-  "name" : "User 3",
-  "picture" : "picture3"
+  "name" : "User 1",
+  "picture" : "picture 1"
 }
 
 
@@ -61,90 +68,82 @@ Content-Type: application/json
 
 {
   "post" : {
-    "id": "99c01dde-447f-48b8-bdfc-9a3af14ff7f1"
+    "id": "a6e048b6-96d5-43ba-a921-d4ad59f7b9f9"
   },
   "parent" : null ,
-  "text" : "kpqwpodsk $%<8f8e91a8-29fb-4d37-9ace-9947d7c1b4ed>$$<User 1> iowdqs " ,
+  "text" : "Comment 1",
   "attachments" : [] ,
   "score" : 4 ,
   "createdBy":   {
-    "id": "989ce8e4-1810-4124-b373-0998fdd3fefc"
+    "id": "935f2590-750e-48b0-b1a7-e68c538877f2"
   },
   "createdAt": "2025-06-10T05:00:53.488657800" ,
   "updatedAt": "2025-06-10T05:00:53.488657800" 
 }
 
 
+### Save For Later
 
-
-
-
-
-
-
-
-### Create new book
-POST http://localhost:8080/Books
+POST http://localhost:8080/api/saveForLaters
 Content-Type: application/json
 
 {
-  "title": "test Book 6",
-  "price": 763,
-  "state": true,
-  "author": {
-    "id": "2d29b090-a0c0-472f-a9ff-ba5c0cb529f6"
+  "post" : {
+    "id": "ca3ac564-4e0e-4214-8da6-24862cd0b505"
+  },
+  "createdBy":   {
+    "id": "935f2590-750e-48b0-b1a7-e68c538877f2"
+  },
+  "createdAt": "2025-06-10T05:00:53.488657800" 
+}
+
+
+### React
+
+POST http://localhost:8080/api/reacts
+Content-Type: application/json
+
+{
+  "type" : 2 ,
+  "post" : {
+    "id": "d38a99d4-72d8-41c5-be87-8a391de83336"
+  },
+  "createdBy":   {
+    "id": "f6f77fcd-70d6-4a49-b954-2d9b8dc6933e"
   }
 }
 
-## d1230870-a4ca-4f59-86fe-531df7a526ed
-## 2b5628dd-2497-4bb9-8868-b33a4c891840
 
-### Delete book by id
-DELETE http://localhost:8080/Books/f3e887d2-7a89-4114-bd55-04002003651b
+###############################################################
 
-
-### Update book Data
-
-Put http://localhost:8080/Books/f3e887d2-7a89-4114-bd55-04002003651b?price=120
+################ Update ################ 
 
 
+###React
 
-### Get ASC books
-GET http://localhost:8080/Books/sorted?sort=price,ASC
+Put http://localhost:8080/api/reacts/75fee2db-02ef-4901-8c46-7694e0535194
+Content-Type: application/json
 
-
-### Get DESC books
-
-GET http://localhost:8080/Books/sorted?sort=price,DESC
+1
 
 
-
-
-### Delete All Books
-DELETE http://localhost:8080/Books/delete
-
-
-#############################################
-
-
-### Get all Authors
-GET http://localhost:8080/Authors
-
-### Create new Authors
-POST http://localhost:8080/Authors
+###Posts
+Put http://localhost:8080/api/posts/238b29b2-9ccf-45de-86ce-118e2d191c25
 Content-Type: application/json
 
 {
-  "firstName": "Author ",
-  "lastName": "3",
-  "phoneNumber": "989278393731"
+  "type": 3 ,
+  "text": "hii",
+  "attachments" : [],
+  "isSaved": false,
+  "isShared": false,
+  "sharedPost":null ,
+  "createdBy": {
+    "id": "55202e36-e379-44b7-9049-e261a38f8e61"
+  },
+  "createdAt": "2025-06-10T05:00:53.488657800" ,
+  "updatedAt": "2025-06-10T05:00:53.488657800" ,
+  "moreData": [],
+  "hashtags": []
 }
-
-
-### Delete Authors by id
-DELETE http://localhost:8080/Authors/f95924a0-bc61-4b78-ac48-dd7e734d06c3
-
-
-### Delete All Authors
-DELETE http://localhost:8080/Authors/delete
 

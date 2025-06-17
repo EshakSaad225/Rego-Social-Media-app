@@ -7,12 +7,16 @@ import java.util.UUID;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.penta.penta_service_posts.enums.PostType;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
@@ -31,6 +35,7 @@ import lombok.NoArgsConstructor;
 @Data 
 @AllArgsConstructor 
 @NoArgsConstructor 
+@EntityListeners(AuditingEntityListener.class)
 public class Post {
 
     @Id
@@ -65,9 +70,11 @@ public class Post {
     private Users createdBy;
 
     @Column
+    @CreatedDate
     private LocalDateTime createdAt;
 
     @Column
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 
     @Column(columnDefinition = "jsonb")

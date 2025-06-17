@@ -7,7 +7,6 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +20,19 @@ import com.penta.penta_service_posts.util.NotFoundException;
 @Service
 public class PostService {
 
-    @Autowired
-    private final PostRepository postRepository ;
+    // @Autowired
+    // private final PostRepository postRepository ;
     
-    @Autowired
-    private UsersRepository usersRepository ;
+    // @Autowired
+    // private UsersRepository usersRepository ;
+
+    private final PostRepository postRepository;
+    private final UsersRepository usersRepository;
+
+    public PostService(PostRepository postRepository, UsersRepository usersRepository) {
+        this.postRepository = postRepository;
+        this.usersRepository = usersRepository;
+    }
 
     public List<Users> getMentionsFromText(String text){ 
 
@@ -50,9 +57,9 @@ public class PostService {
     return usres ;
   }
 
-    public PostService(final PostRepository postRepository) {
-        this.postRepository = postRepository;
-    }
+    // public PostService(final PostRepository postRepository) {
+    //     this.postRepository = postRepository;
+    // }
 
     public List<PostDTO> findAll() {
         final List<Post> posts = postRepository.findAll(Sort.by("id"));
@@ -61,11 +68,18 @@ public class PostService {
                 .toList();
     }
 
-    public PostDTO get(final UUID id) {
-        return postRepository.findById(id)
+    public List<PostDTO> getUserPosts(UUID userId) {
+        final List<Post> posts = postRepository.findByCreatedById(userId);
+        return posts.stream()
                 .map(post -> mapToDTO(post, new PostDTO()))
-                .orElseThrow(NotFoundException::new);
+                .toList();
     }
+
+    // public PostDTO get(final UUID id) {
+    //     return postRepository.findById(id)
+    //             .map(post -> mapToDTO(post, new PostDTO()))
+    //             .orElseThrow(NotFoundException::new);
+    // }
 
     public UUID create(final PostDTO postDTO) {
         final Post post = new Post();
@@ -95,8 +109,8 @@ public class PostService {
         postDTO.setIsShared(post.getIsShared());
         postDTO.setSharedPost(post.getSharedPost());
         postDTO.setCreatedBy(post.getCreatedBy());
-        postDTO.setCreatedAt(post.getCreatedAt());
-        postDTO.setUpdatedAt(post.getUpdatedAt());
+        // postDTO.setCreatedAt(post.getCreatedAt());
+        // postDTO.setUpdatedAt(post.getUpdatedAt());
         postDTO.setMoreData(post.getMoreData());
         postDTO.setMentions(post.getMentions());
         postDTO.setHashtags(post.getHashtags());
@@ -112,8 +126,8 @@ public class PostService {
         post.setIsShared(postDTO.getIsShared());
         post.setSharedPost(postDTO.getSharedPost());
         post.setCreatedBy(postDTO.getCreatedBy());
-        post.setCreatedAt(postDTO.getCreatedAt());
-        post.setUpdatedAt(postDTO.getUpdatedAt());
+        // post.setCreatedAt(postDTO.getCreatedAt());
+        // post.setUpdatedAt(postDTO.getUpdatedAt());
         post.setMoreData(postDTO.getMoreData());
         post.setMentions(getMentionsFromText( postDTO.getText()));
         post.setHashtags(postDTO.getHashtags());

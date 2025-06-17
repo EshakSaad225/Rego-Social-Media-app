@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.hibernate.annotations.UuidGenerator;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import com.penta.penta_service_posts.enums.ReportType;
 
@@ -49,9 +51,11 @@ public class Report {
     private Users createdBy;
 
     @Column
+    @CreatedDate
     private LocalDateTime createdAt;
 
     @Column
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 
 }

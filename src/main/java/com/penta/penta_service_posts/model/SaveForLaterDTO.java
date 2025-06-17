@@ -18,7 +18,7 @@ public class SaveForLaterDTO {
 
     private UUID id;
     private Post post;
-    private Users user;
-    private LocalDateTime savedAt;
+    private Users createdBy;
+    private LocalDateTime createdAt;
 
 }

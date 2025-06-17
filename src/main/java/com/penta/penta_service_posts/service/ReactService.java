@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.penta.penta_service_posts.domain.React;
+import com.penta.penta_service_posts.enums.ReactType;
 import com.penta.penta_service_posts.model.ReactDTO;
 import com.penta.penta_service_posts.repos.ReactRepository;
 import com.penta.penta_service_posts.util.NotFoundException;
@@ -40,10 +41,11 @@ public class ReactService {
         return reactRepository.save(react).getId();
     }
 
-    public void update(final UUID id, final ReactDTO reactDTO) {
+    public void update(final UUID id, final ReactType type ) {
         final React react = reactRepository.findById(id)
                 .orElseThrow(NotFoundException::new);
-        mapToEntity(reactDTO, react);
+        // mapToEntity(reactDTO, react);
+        react.setType(type);
         reactRepository.save(react);
     }
 

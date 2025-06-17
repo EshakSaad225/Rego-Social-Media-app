@@ -4,10 +4,11 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.hibernate.annotations.UuidGenerator;
+import org.springframework.data.annotation.CreatedDate;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -28,15 +29,16 @@ public class SaveForLater {
     @UuidGenerator
     private UUID id;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "postSaveForLater_id")
     private Post post;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private Users user;
+    @OneToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "created_by")
+    private Users createdBy;
 
     @Column
-    private LocalDateTime savedAt;
+    @CreatedDate
+    private LocalDateTime createdAt;
 
 }

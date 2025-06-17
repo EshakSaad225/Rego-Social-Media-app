@@ -1,11 +1,8 @@
 package com.penta.penta_service_posts.rest;
 
-import com.penta.penta_service_posts.model.PostDTO;
-import com.penta.penta_service_posts.service.PostService;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +14,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.penta.penta_service_posts.model.PostDTO;
+import com.penta.penta_service_posts.service.PostService;
+
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -34,10 +37,17 @@ public class PostResource {
         return ResponseEntity.ok(postService.findAll());
     }
 
+
     @GetMapping("/{id}")
-    public ResponseEntity<PostDTO> getPost(@PathVariable(name = "id") final UUID id) {
-        return ResponseEntity.ok(postService.get(id));
+    public ResponseEntity<List<PostDTO>> getUserPosts(@PathVariable(name = "id") final UUID id) {
+        return ResponseEntity.ok(postService.getUserPosts(id));
     }
+
+
+    // @GetMapping("/{id}")
+    // public ResponseEntity<PostDTO> getPost(@PathVariable(name = "id") final UUID id) {
+    //     return ResponseEntity.ok(postService.get(id));
+    // }
 
     @PostMapping
     @ApiResponse(responseCode = "201")

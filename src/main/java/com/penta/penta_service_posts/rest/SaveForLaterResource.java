@@ -1,11 +1,8 @@
 package com.penta.penta_service_posts.rest;
 
-import com.penta.penta_service_posts.model.SaveForLaterDTO;
-import com.penta.penta_service_posts.service.SaveForLaterService;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +14,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.penta.penta_service_posts.model.SaveForLaterDTO;
+import com.penta.penta_service_posts.service.SaveForLaterService;
+
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -35,10 +38,16 @@ public class SaveForLaterResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SaveForLaterDTO> getSaveForLater(
+    public ResponseEntity<List<SaveForLaterDTO>> getUsersSaveForLaterPosts(
             @PathVariable(name = "id") final UUID id) {
-        return ResponseEntity.ok(saveForLaterService.get(id));
+        return ResponseEntity.ok(saveForLaterService.getUserSaveForLaterPosts(id));
     }
+
+    // @GetMapping("/{id}")
+    // public ResponseEntity<SaveForLaterDTO> getSaveForLater(
+    //         @PathVariable(name = "id") final UUID id) {
+    //     return ResponseEntity.ok(saveForLaterService.get(id));
+    // }
 
     @PostMapping
     @ApiResponse(responseCode = "201")
